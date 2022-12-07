@@ -31,7 +31,7 @@
             padding: .5rem
         }
         .container-profile {
-            max-width: 600px;
+            max-width: 900px;
             width: 100%;
             margin: auto
         }
@@ -48,12 +48,12 @@
         .danmer-hidden-header {
             position: absolute;
             left: 10px;
-            bottom: -60%;
+            bottom: -50px;
         }
         .btn-follow {
             position: absolute;
             right: 4%;
-            bottom: -50%;
+            bottom: -50px;
         }
 
         .profile > img {
@@ -84,7 +84,7 @@
 
         .danmer-toggle,
         .danmer-collapse {
-            max-width: 5vw max-height: 5vh
+            max-width: 5vw; max-height: 5vh
         }
     </style>
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -93,7 +93,7 @@
 <body>
     <div id="app">
         <header class="navbar navbar-expand-md bg-black navbar-light shadow-sm danmer-nav-contaifner">
-            <nav class="container-profile  danmer-container">
+            <nav class="container-profile danmer-container">
                 <div class="container-header">
                     <a class="navbar-brand" href="{{ url('/') }}">
                         {{ config('app.name', 'Laravel') }}
