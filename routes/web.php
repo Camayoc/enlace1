@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CompleteLinkController;
 use App\Http\Controllers\GoogleController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
@@ -23,12 +24,17 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/link/{enlace}', [App\Http\Controllers\PublicController::class, 'hash'])->name('link');
+Route::get('/mylinks', [App\Http\Controllers\LinkController::class, 'index'])->name('link.list');
+Route::post('/addlink', [App\Http\Controllers\LinkController::class, 'store'])->name('link.list');
 
+Route::post('completelink', [App\Http\Controllers\HomeController::class, 'completelink']);
 
-Route::prefix('google')->name('google.')->group( function(){
+Route::prefix('google')->name('google.')->group(function () {
     Route::get('login', [GoogleController::class, 'loginWithGoogle'])->name('login');
     Route::any('callback', [GoogleController::class, 'callbackFromGoogle'])->name('callback');
 });
+
 Route::get('/auth/callback/{provider}', function ($provider) {
     $githubUser = Socialite::driver($provider)->user();
 

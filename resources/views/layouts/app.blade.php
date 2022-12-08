@@ -28,7 +28,11 @@
         .container-header {
             display: flex;
             justify-content: space-between;
-            padding: .5rem
+            padding: .5rem;
+        }
+        .container-header *{
+            color: #ffffff !important;
+
         }
         .container-profile {
             max-width: 900px;
@@ -48,7 +52,7 @@
         .danmer-hidden-header {
             position: absolute;
             left: 10px;
-            bottom: -50px;
+            bottom: -60px;
         }
         .btn-follow {
             position: absolute;
@@ -58,15 +62,17 @@
 
         .profile > img {
             border-radius: 50%;
+            background-color: white;
             width: 100px;
             height: 100px;
-            border: 2px solid #fff
+            border: 4px solid #fff
             /* transform: translate(0px,-50%) */
         }
 
         .danmer-container {
             height: 20vh;
             position: relative;
+            transition: linear 1s;
         }
 
         .container.danmer-container {
@@ -86,13 +92,32 @@
         .danmer-collapse {
             max-width: 5vw; max-height: 5vh
         }
+        @media screen and (min-width: 640px) and (max-width: 900px) {
+            .danmer-container {
+                max-width: 80%;
+            }
+        }
+
+        .btn-follow button{
+            width: 80px;
+            border-radius: 2.5px;
+            border:1px solid rgba(96, 96, 96, 0.834);
+            --bs-card-border-color: var(--bs-border-color-translucent);
+        }
+        .danmer-nav-contaifner{
+            background-image:url(https://i.picsum.photos/id/722/1400/300.jpg?hmac=vuT5H-nr41VZTRg0PQEOyLUoPTYbMG6Xq0T0w4VHO3c)
+        }
+
+        .card {
+            margin-bottom: 30px
+        }
     </style>
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 
 <body>
     <div id="app">
-        <header class="navbar navbar-expand-md bg-black navbar-light shadow-sm danmer-nav-contaifner">
+        <header class="navbar navbar-expand-md navbar-light shadow-sm danmer-nav-contaifner">
             <nav class="container-profile danmer-container">
                 <div class="container-header">
                     <a class="navbar-brand" href="{{ url('/') }}">
@@ -103,51 +128,52 @@
                         aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                </div>
+                    <div class="collapse navbar-collapse danmer-collapse" id="navbarSupportedContent">
+                        <!-- Left Side Of Navbar -->
+                        <ul class="navbar-nav me-auto">
 
-                <div class="collapse navbar-collapse danmer-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
+                        </ul>
 
-                    </ul>
+                        <!-- Right Side Of Navbar -->
+                        <ul class="navbar-nav ms-auto">
+                            <!-- Authentication Links -->
+                            @guest
+                                @if (Route::has('login'))
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    </li>
+                                @endif
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                @if (Route::has('register'))
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    </li>
+                                @endif
+                            @else
+                                <li class="nav-item dropdown">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        {{ Auth::user()->name }}
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
+                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                                         document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
+                                        </a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                            @csrf
+                                        </form>
+                                    </div>
+                                </li>
+                            @endguest
+                        </ul>
+                    </div>
                 </div>
+
+
                 <div class="danmer-hidden-header">
                     <div class="profile">
                         <img src="https://i.picsum.photos/id/533/200/300.jpg?hmac=eehg5zb3wyJViBC8IiDL85fqqk9z85uHtRciYvDovgA"

@@ -38,6 +38,15 @@
                                 @enderror
                             </div>
                         </div>
+                        <div class="row mb-3">
+                            <input-label label="Enlance" prependurl="{{url('/')."/link"}}" :default="'{{ old('enlace') }}'">
+                                @error('enlace')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </input-label>
+                        </div>
 
                         <div class="row mb-3">
                             <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
