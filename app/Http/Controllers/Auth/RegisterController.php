@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Profile;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -31,6 +32,17 @@ class RegisterController extends Controller
      */
     //protected $redirectTo = RouteServiceProvider::HOME;
 
+     /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function showRegistrationForm()
+    {
+        return view('auth.register')->with('user',Profile::virtual());
+    }
+
+
     /**
      * Create a new controller instance.
      *
@@ -54,6 +66,8 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'enlace' => ['required', 'string', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'header_filename' => ['required', 'string', 'min:8', 'confirmed'],
+            'profile_filename' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
 
@@ -70,6 +84,8 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'enlace' => $data['enlace'],
             'password' => Hash::make($data['password']),
+            'header_filename'=>'default.png',
+            'profile_filename'=>'default.png',
         ]);
     }
 }

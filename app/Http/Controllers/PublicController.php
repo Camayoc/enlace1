@@ -19,6 +19,6 @@ class PublicController extends Controller
         if ($user == null) {
             abort(404);
         }
-        return view('home')->with('user', $user);
+        return view('public')->with('user', $user);
     }
 }

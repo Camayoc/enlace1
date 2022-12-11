@@ -14,6 +14,11 @@ import { createApp } from "vue";
  */
 
 const app = createApp({
+    methods: {
+        log(data) {
+            console.log(data)
+        }
+    },
     mounted() {
         console.log("asdas");
     },
@@ -23,10 +28,22 @@ import ExampleComponent from "./components/ExampleComponent.vue";
 import InputLabel from "./components/InputLabel.vue";
 import LinksManager from "./components/LinksManager.vue";
 import CompletingLink from "./components/CompletingLink.vue";
+import UploadPhoto from "./components/UploadPhoto.vue";
+import ProfileUpload from "./components/ProfileUpload.vue";
+import ProfileUpload2 from "./components/ProfileUpload2.vue";
+import HeaderUpload from "./components/HeaderUpload.vue";
+import ModalComponent from "./components/ModalComponent.vue";
+import Upload2 from "./components/Upload2.vue";
 app.component("example-component", ExampleComponent);
 app.component("completing-link", CompletingLink);
+app.component("upload-foto", UploadPhoto);
 app.component("input-label", InputLabel);
 app.component("links-manager", LinksManager);
+app.component("profile-upload", ProfileUpload);
+app.component("profile-upload2", ProfileUpload2);
+app.component("header-upload", HeaderUpload);
+app.component("modal-component", ModalComponent);
+app.component("upload2", Upload2);
 
 /**
  * The following block of code may be used to automatically register your

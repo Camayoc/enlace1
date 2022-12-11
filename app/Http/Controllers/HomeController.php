@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Link;
 use App\Models\User;
+use App\Profile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
@@ -17,6 +19,7 @@ class HomeController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('enlace');
+
     }
 
     /**
@@ -26,7 +29,30 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+
+        $user = auth()->user();
+        return view('home')->with('user', $user);
+    }
+
+    public function uploadMini(Request $request){
+        $user = auth()->user();
+        $file = $request->get('file');
+        $extension = explode('/', mime_content_type($file))[1];
+        $filename = $user->id.".".$extension;
+        $name = Storage::disk('local')->put("public/profile/".$filename,base64_decode(explode(',',$file)[1]));
+        $user->profile_filename = $filename;
+        $user->save();
+        return $this->sendResponse($name);
+    }
+    public function uploadHeader(Request $request){
+        $user = auth()->user();
+        $file = $request->get('file');
+        $extension = explode('/', mime_content_type($file))[1];
+        $filename = $user->id.".".$extension;
+        $name = Storage::disk('local')->put("public/header/".$filename,base64_decode(explode(',',$file)[1]));
+        $user->header_filename = $filename;
+        $user->save();
+        return $this->sendResponse($name);
     }
 
     public function completelink(Request $request)

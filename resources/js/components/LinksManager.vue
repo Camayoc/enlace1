@@ -1,5 +1,5 @@
 <template>
-    <transtion name="pfade">
+    <span>
         <slot></slot>
         <div class="card" v-for="(link, index) in links" :key="index">
             <div class="card-header">{{ link.platform }}</div>
@@ -28,7 +28,7 @@
                 <button class="btn btn-primary" @click="save()">Guardar</button>
             </div>
         </div>
-    </transtion>
+    </span>
 </template>
 
 <script>

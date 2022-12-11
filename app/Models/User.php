@@ -22,7 +22,14 @@ class User extends Authenticatable
         'email',
         'enlace',
         'password',
-        'google_id'
+        'google_id',
+        'header_filename',
+        'profile_filename'
+    ];
+
+    protected $appends  = [
+        'header',
+        'profile'
     ];
 
     /**
@@ -53,5 +60,13 @@ class User extends Authenticatable
     public function links(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Link::class, 'user_id', 'id');
+    }
+
+    public function getHeaderAttribute(){
+        return url("/storage/header")."/".$this->header_filename;
+    }
+
+    public function getProfileAttribute(){
+        return url('/storage/profile')."/".$this->profile_filename;
     }
 }

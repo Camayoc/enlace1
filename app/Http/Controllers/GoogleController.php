@@ -30,6 +30,8 @@ class GoogleController extends Controller
                 ], [
                     'name' => $user->getName(),
                     'email' => $user->getEmail(),
+                    'header_filename' => "default.png",
+                    'profile_filename' => "default.png",
                     'password' => Hash::make($user->getName() . '@' . $user->getId())
                 ]);
             } else {

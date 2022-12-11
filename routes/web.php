@@ -3,6 +3,7 @@
 use App\Http\Controllers\CompleteLinkController;
 use App\Http\Controllers\GoogleController;
 use App\Models\User;
+use App\Profile;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -18,7 +19,7 @@ use Laravel\Socialite\Facades\Socialite;
 */
 
 Route::get('/', function () {
-    return view('public');
+    return redirect('/login');
 });
 
 Auth::routes();
@@ -29,6 +30,8 @@ Route::get('/mylinks', [App\Http\Controllers\LinkController::class, 'index'])->n
 Route::post('/addlink', [App\Http\Controllers\LinkController::class, 'store'])->name('link.list');
 
 Route::post('completelink', [App\Http\Controllers\HomeController::class, 'completelink']);
+Route::post('profile/mini', [App\Http\Controllers\HomeController::class, 'uploadMini']);
+Route::post('profile/header', [App\Http\Controllers\HomeController::class, 'uploadHeader']);
 
 Route::prefix('google')->name('google.')->group(function () {
     Route::get('login', [GoogleController::class, 'loginWithGoogle'])->name('login');

@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('google_id')->nullable();
             $table->string('email')->unique();
+            $table->string('header_filename');
+            $table->string('profile_filename');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('enlace')->unique()->nullable();
